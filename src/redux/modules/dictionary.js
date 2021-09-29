@@ -1,4 +1,5 @@
 // dictionary.js
+// 리덕스(미들웨어 제외!)
 import { db } from "../../firebase";
 import {
   collection,
@@ -55,7 +56,7 @@ export const addDictionaryFB = (dictionary_list) => {
   };
 };
 
-// Reducer
+// Reducer(리듀서)
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case "dictionary/LOAD": {

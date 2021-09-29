@@ -1,11 +1,12 @@
+// AddList.js
+
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { addDictionaryFB } from "./redux/modules/dictionary";
 import { useDispatch } from "react-redux";
-import { updateDoc } from "@firebase/firestore";
+import { addDictionaryFB } from "./redux/modules/dictionary";
 
-const AddList = ({ list }) => {
+const AddList = ({}) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -18,6 +19,8 @@ const AddList = ({ list }) => {
     dispatch(addDictionaryFB(card));
   };
 
+  //ref를 선언해준다.
+  // input에 있는 값들을 가지고오겠다. 초기값을 null로하겠다.!
   const word = React.useRef(null);
   const account = React.useRef(null);
   const example = React.useRef(null);
@@ -27,40 +30,78 @@ const AddList = ({ list }) => {
   console.log(example);
   return (
     <Container>
-      <Title>단어 추가하기</Title>
-      <SecondDiv>
+      <Title>단어추가하기</Title>
+      <div>
         <SecondTitle>단어</SecondTitle>
-        <input ref={word} type="text" placeholder="단어를 입력하세요!" />
-      </SecondDiv>
-      <SecondDiv>
+        <Input type="text" ref={word} placeholder="단어를 입력해주세요." />
         <SecondTitle>설명</SecondTitle>
-        <input ref={account} type="text" placeholder="설명을 입력하세요!" />
-      </SecondDiv>
-      <SecondDiv>
+        <Input type="text" ref={account} placeholder="설명을 입력해주세요." />
         <SecondTitle>예시</SecondTitle>
-        <input ref={example} type="text" placeholder="예시를 입력하세요!" />
-      </SecondDiv>
-
-      <Button
-        onClick={() => {
-          dictionary_index();
-          history.push("/");
-        }}
-      >
-        추가하기
-      </Button>
+        <Input type="text" ref={example} placeholder="예시를 입력해주세요." />
+      </div>
+      <ButtonWrap>
+        <Button
+          onClick={() => {
+            history.push("/");
+            dictionary_index();
+          }}
+        >
+          추가하기
+        </Button>
+        <Button
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          뒤로가기
+        </Button>
+      </ButtonWrap>
     </Container>
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  border: 2px solid #ddd;
+  width: 300px;
+  margin: auto;
+  border-radius: 30px;
+  padding: 10px;
+`;
 
-const Title = styled.h3``;
+const Title = styled.h1`
+  text-align: center;
+`;
 
-const SecondDiv = styled.div``;
+const SecondTitle = styled.h5`
+  text-decoration: underline;
+`;
 
-const SecondTitle = styled.h5``;
+const Input = styled.input`
+  display: flex;
+  justify-content: center;
+  width: 280px;
+  margin: auto;
+  border: 1px solid orange;
+  border-radius: 30px;
+  padding: 5px;
+`;
 
-const Button = styled.div``;
+const ButtonWrap = styled.div`
+  display: flex;
+`;
+
+const Button = styled.button`
+  width: 140px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  background: orange;
+  border: 2px solid orange;
+  border-radius: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
+  cursor: pointer;
+`;
 
 export default AddList;
